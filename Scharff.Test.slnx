@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="Scharff.Test.Api/Scharff.Test.Api.csproj" />
+  <Project Path="Scharff.Test.Application/Scharff.Test.Application.csproj" />
+  <Project Path="Scharff.Test.Domain/Scharff.Test.Domain.csproj" />
+  <Project Path="Scharff.Test.Infrastructure/Scharff.Test.Infrastructure.csproj" />
+  <Project Path="Scharff.Test.UnitTests/Scharff.Test.UnitTests.csproj" />
+</Solution>

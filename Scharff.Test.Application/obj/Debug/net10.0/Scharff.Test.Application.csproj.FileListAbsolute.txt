@@ -1,0 +1,15 @@
+D:\.NET ESTUDIOS\Scharff.Test\Scharff.Test.Application\bin\Debug\net10.0\Scharff.Test.Application.deps.json
+D:\.NET ESTUDIOS\Scharff.Test\Scharff.Test.Application\bin\Debug\net10.0\Scharff.Test.Application.dll
+D:\.NET ESTUDIOS\Scharff.Test\Scharff.Test.Application\bin\Debug\net10.0\Scharff.Test.Application.pdb
+D:\.NET ESTUDIOS\Scharff.Test\Scharff.Test.Application\bin\Debug\net10.0\Scharff.Test.Domain.dll
+D:\.NET ESTUDIOS\Scharff.Test\Scharff.Test.Application\bin\Debug\net10.0\Scharff.Test.Domain.pdb
+D:\.NET ESTUDIOS\Scharff.Test\Scharff.Test.Application\obj\Debug\net10.0\Scharff.Test.Application.csproj.AssemblyReference.cache
+D:\.NET ESTUDIOS\Scharff.Test\Scharff.Test.Application\obj\Debug\net10.0\Scharff.Test.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\.NET ESTUDIOS\Scharff.Test\Scharff.Test.Application\obj\Debug\net10.0\Scharff.Test.Application.AssemblyInfoInputs.cache
+D:\.NET ESTUDIOS\Scharff.Test\Scharff.Test.Application\obj\Debug\net10.0\Scharff.Test.Application.AssemblyInfo.cs
+D:\.NET ESTUDIOS\Scharff.Test\Scharff.Test.Application\obj\Debug\net10.0\Scharff.Test.Application.csproj.CoreCompileInputs.cache
+D:\.NET ESTUDIOS\Scharff.Test\Scharff.Test.Application\obj\Debug\net10.0\Scharff..3CABEEA3.Up2Date
+D:\.NET ESTUDIOS\Scharff.Test\Scharff.Test.Application\obj\Debug\net10.0\Scharff.Test.Application.dll
+D:\.NET ESTUDIOS\Scharff.Test\Scharff.Test.Application\obj\Debug\net10.0\refint\Scharff.Test.Application.dll
+D:\.NET ESTUDIOS\Scharff.Test\Scharff.Test.Application\obj\Debug\net10.0\Scharff.Test.Application.pdb
+D:\.NET ESTUDIOS\Scharff.Test\Scharff.Test.Application\obj\Debug\net10.0\ref\Scharff.Test.Application.dll

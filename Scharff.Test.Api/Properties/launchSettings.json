@@ -1,0 +1,20 @@
+﻿{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:5240",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "IntegrationConfig__StorageBaseUrl": "https://midevstorage.blob.core.windows.net/orders-dev",
+        "IntegrationConfig__TiendasPeruanasWebhookUrl": "https://webhook.site/864a16c7-f41b-4273-9fdf-61750e26d981",
+        "IntegrationConfig__DefaultWebhookUrl": "https://webhook.site/850c2e47-2e25-423b-b6ba-18db7e035b21",
+        "IntegrationConfig__MaxDeliveryAttempts": "3",
+        "IntegrationConfig__RetryMaxAttempts": "3",
+        "IntegrationConfig__TmsApiKey": "local-dev-api-key-12345"
+      }
+    }
+  }
+}
