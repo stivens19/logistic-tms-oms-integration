@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "Scharff.Test.Api.Controllers.AuthController",
+    "Method": "GenerateToken",
+    "RelativePath": "api/v1/auth/token",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Scharff.Test.Api.Controllers.AuthRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Scharff.Test.Api.Controllers.OrdersController",
     "Method": "GetOrder",
     "RelativePath": "api/v1/orders/{orderNumber}",

@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Scharff.Test.Application\Scharff.Test.Application.csproj" />
     <ProjectReference Include="..\Scharff.Test.Domain\Scharff.Test.Domain.csproj" />
+    <ProjectReference Include="..\Scharff.Test.Infrastructure\Scharff.Test.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

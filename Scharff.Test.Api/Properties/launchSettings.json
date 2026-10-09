@@ -13,7 +13,13 @@
         "IntegrationConfig__DefaultWebhookUrl": "https://webhook.site/850c2e47-2e25-423b-b6ba-18db7e035b21",
         "IntegrationConfig__MaxDeliveryAttempts": "3",
         "IntegrationConfig__RetryMaxAttempts": "3",
-        "IntegrationConfig__TmsApiKey": "local-dev-api-key-12345"
+        "IntegrationConfig__TmsApiKey": "local-dev-api-key-12345",
+        "JwtSettings__SecretKey": "SuperSecretClaveParaFirmarTokensJwtDeLogisticaTMS2026",
+        "JwtSettings__Issuer": "LogisticIntegrationApi",
+        "JwtSettings__Audience": "TMS_OMS_Clients",
+        "JwtSettings__ExpirationMinutes": "120",
+        "Credentials__AUTH_CLIENT_ID": "beetrack-tms",
+        "Credentials__AUTH_CLIENT_SECRET": "secret123"
       }
     }
   }

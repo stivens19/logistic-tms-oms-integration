@@ -4,6 +4,7 @@ using Scharff.Test.Application.UseCases;
 using Scharff.Test.Infrastructure.Notifications;
 using Scharff.Test.Infrastructure.Persistence;
 using Scharff.Test.Infrastructure.Queues;
+using Scharff.Test.Infrastructure.Services;
 using Scharff.Test.Infrastructure.Storage;
 using Scharff.Test.Infrastructure.Workers;
 
@@ -25,6 +26,8 @@ namespace Scharff.Test.Api.Extensions
 
             services.AddSingleton<InMemoryEventQueue>();
             services.AddHostedService<EventProcessorWorker>();
+
+            services.AddScoped<ITokenService, JwtTokenService>();
 
             return services;
         }
