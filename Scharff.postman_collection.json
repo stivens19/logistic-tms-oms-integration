@@ -1,0 +1,648 @@
+{
+  "info": {
+    "_postman_id": "f63d35b5-ef88-43ce-83ae-180c21c5fd57",
+    "name": "Scharff",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "11860350"
+  },
+  "item": [
+    {
+      "name": "AUTH",
+      "item": [
+        {
+          "name": "login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "if (pm.response.code === 200) {\r",
+                  "    const responseData = pm.response.json();\r",
+                  "    \r",
+                  "    const token = responseData.access_token || responseData.token;\r",
+                  "\r",
+                  "    if (token) {\r",
+                  "        pm.environment.set(\"jwt_token\", token);\r",
+                  "        console.log(\"Token guardado con éxito en {{jwt_token}}\");\r",
+                  "    } else {\r",
+                  "        console.warn(\"No se encontró la propiedad access_token en la respuesta.\");\r",
+                  "    }\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"ClientId\":\"beetrack-tms\",\r\n    \"ClientSecret\":\"secret123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/auth/token",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "auth",
+                "token"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "WEBHOOK",
+      "item": [
+        {
+          "name": "Flujo Operativo de Recojo (Pickup)",
+          "item": [
+            {
+              "name": "PLANNING",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"serviceType\": \"PICKUP\",\r\n  \"dispatchType\": \"STORE_WITHDRAWAL\",\r\n  \"status\": \"PLANNING\",\r\n  \"subStatus\": \"ASSIGNED TO ROUTE\",\r\n  \"vehicleCode\": \"LIMURB06VAN\",\r\n  \"courierName\": \"Conductor 46\",\r\n  \"details\": {\r\n    \"orderNumber\": \"ORD-PICKUP-01\",\r\n    \"trackingNumber\": \"TRK-PK-01\",\r\n    \"clientCode\": \"01021755\",\r\n    \"clientName\": \"TIENDAS PERUANAS S.A.\",\r\n    \"receivedBy\": \"\",\r\n    \"comments\": \"Pedido programado para recojo\",\r\n    \"evidences\": []\r\n  },\r\n  \"eventDate\": \"2026-10-07 08:00:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/webhooks/tms",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "webhooks",
+                    "tms"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "STARTED",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"serviceType\": \"PICKUP\",\r\n  \"dispatchType\": \"STORE_WITHDRAWAL\",\r\n  \"status\": \"STARTED\",\r\n  \"subStatus\": \"ROUTE STARTED\",\r\n  \"vehicleCode\": \"LIMURB06VAN\",\r\n  \"courierName\": \"Conductor 46\",\r\n  \"details\": {\r\n    \"orderNumber\": \"ORD-PICKUP-01\",\r\n    \"trackingNumber\": \"TRK-PK-01\",\r\n    \"clientCode\": \"01021755\",\r\n    \"clientName\": \"TIENDAS PERUANAS S.A.\",\r\n    \"receivedBy\": \"\",\r\n    \"comments\": \"Conductor en trayecto al punto\",\r\n    \"evidences\": []\r\n  },\r\n  \"eventDate\": \"2026-10-07 08:20:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/webhooks/tms",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "webhooks",
+                    "tms"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "AT PICKUP POINT",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"serviceType\": \"PICKUP\",\r\n  \"dispatchType\": \"STORE_WITHDRAWAL\",\r\n  \"status\": \"AT PICKUP POINT\",\r\n  \"subStatus\": \"ARRIVED\",\r\n  \"vehicleCode\": \"LIMURB06VAN\",\r\n  \"courierName\": \"Conductor 46\",\r\n  \"details\": {\r\n    \"orderNumber\": \"ORD-PICKUP-01\",\r\n    \"trackingNumber\": \"TRK-PK-01\",\r\n    \"clientCode\": \"01021755\",\r\n    \"clientName\": \"TIENDAS PERUANAS S.A.\",\r\n    \"receivedBy\": \"\",\r\n    \"comments\": \"Vehículo estacionado en andén\",\r\n    \"evidences\": []\r\n  },\r\n  \"eventDate\": \"2026-10-07 08:45:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/webhooks/tms",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "webhooks",
+                    "tms"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "COLLECTED",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"serviceType\": \"PICKUP\",\r\n  \"dispatchType\": \"STORE_WITHDRAWAL\",\r\n  \"status\": \"COLLECTED\",\r\n  \"subStatus\": \"PACKAGE VERIFIED\",\r\n  \"vehicleCode\": \"LIMURB06VAN\",\r\n  \"courierName\": \"Conductor 46\",\r\n  \"details\": {\r\n    \"orderNumber\": \"ORD-PICKUP-01\",\r\n    \"trackingNumber\": \"TRK-PK-01\",\r\n    \"clientCode\": \"01021755\",\r\n    \"clientName\": \"TIENDAS PERUANAS S.A.\",\r\n    \"receivedBy\": \"Jefe de Almacén\",\r\n    \"comments\": \"Caja sellada y recibida\",\r\n    \"evidences\": [\r\n      {\r\n        \"label\": \"Guía Firmada\",\r\n        \"fileType\": \".jpg\",\r\n        \"fileName\": \"guia_recojo_01.jpg\",\r\n        \"url\": \"https://beetrack.com/img/guia_01.jpg\"\r\n      },\r\n      {\r\n        \"label\": \"Foto Paquete\",\r\n        \"fileType\": \".jpg\",\r\n        \"fileName\": \"paquete_recojo_01.jpg\",\r\n        \"url\": \"https://beetrack.com/img/paquete_01.jpg\"\r\n      }\r\n    ]\r\n  },\r\n  \"eventDate\": \"2026-10-07 09:05:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/webhooks/tms",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "webhooks",
+                    "tms"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "Valida el inicio de tracking en el OMS sin disparar descargas de evidencias."
+        },
+        {
+          "name": "Recojo Fallido (NOT COLLECTED)",
+          "item": [
+            {
+              "name": "NOT COLLECTED",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"serviceType\": \"PICKUP\",\r\n  \"dispatchType\": \"STORE_WITHDRAWAL\",\r\n  \"status\": \"NOT COLLECTED\",\r\n  \"subStatus\": \"STORE CLOSED\",\r\n  \"vehicleCode\": \"LIMURB06VAN\",\r\n  \"courierName\": \"Conductor 46\",\r\n  \"details\": {\r\n    \"orderNumber\": \"ORD-RECOJO-FALLIDO-02\",\r\n    \"trackingNumber\": \"TRK-PK-02\",\r\n    \"clientCode\": \"CLIENTE_GENERICO_99\",\r\n    \"clientName\": \"RETAIL CORP\",\r\n    \"receivedBy\": \"\",\r\n    \"comments\": \"Local cerrado en horario de atención\",\r\n    \"evidences\": [\r\n      {\r\n        \"label\": \"Fachada Local\",\r\n        \"fileType\": \".jpg\",\r\n        \"fileName\": \"fachada_cerrada_02.jpg\",\r\n        \"url\": \"https://beetrack.com/img/cerrado_02.jpg\"\r\n      }\r\n    ]\r\n  },\r\n  \"eventDate\": \"2026-10-07 09:30:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/webhooks/tms",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "webhooks",
+                    "tms"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "Valida el guardado de evidencias en recojo fallido y la notificación a un cliente que usa la estructura estándar"
+        },
+        {
+          "name": "Regla de 3 Visitas Fallidas _ Auto-emisión",
+          "item": [
+            {
+              "name": "REINTENTOS",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"serviceType\": \"LAST_MILE\",\r\n  \"dispatchType\": \"HOME_DELIVERY\",\r\n  \"status\": \"NOT DELIVERED\",\r\n  \"subStatus\": \"CLIENT NOT AT HOME\",\r\n  \"vehicleCode\": \"LIMURB06VAN\",\r\n  \"courierName\": \"Conductor 46\",\r\n  \"details\": {\r\n    \"orderNumber\": \"ORD-FALLAS-3V\",\r\n    \"trackingNumber\": \"TRK-3V-01\",\r\n    \"clientCode\": \"01021755\",\r\n    \"clientName\": \"TIENDAS PERUANAS S.A.\",\r\n    \"receivedBy\": \"\",\r\n    \"comments\": \"Primer intento: Nadie en domicilio\",\r\n    \"evidences\": [\r\n      {\r\n        \"label\": \"Fachada Intento 1\",\r\n        \"fileType\": \".jpg\",\r\n        \"fileName\": \"fachada_intento1.jpg\",\r\n        \"url\": \"https://beetrack.com/img/visita1.jpg\"\r\n      }\r\n    ]\r\n  },\r\n  \"eventDate\": \"2026-10-07 10:00:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/webhooks/tms",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "webhooks",
+                    "tms"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "Ejecuta estas 3 solicitudes de manera consecutiva para el mismo pedido `ORD-FALLAS-3V`"
+        },
+        {
+          "name": "Evento Directo TO BE RETURN (Sin evidencias)",
+          "item": [
+            {
+              "name": "TO BE RETURN",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"serviceType\": \"RETURN\",\r\n  \"dispatchType\": \"REVERSE\",\r\n  \"status\": \"TO BE RETURN\",\r\n  \"subStatus\": \"RETURN APPROVED BY DISPATCH\",\r\n  \"vehicleCode\": \"LIMURB06VAN\",\r\n  \"courierName\": \"Conductor 46\",\r\n  \"details\": {\r\n    \"orderNumber\": \"ORD-RETORNO-DIRECTO-03\",\r\n    \"trackingNumber\": \"TRK-RT-03\",\r\n    \"clientCode\": \"01021755\",\r\n    \"clientName\": \"TIENDAS PERUANAS S.A.\",\r\n    \"receivedBy\": \"\",\r\n    \"comments\": \"Devolución solicitada por la central operativa\",\r\n    \"evidences\": []\r\n  },\r\n  \"eventDate\": \"2026-10-07 18:30:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/webhooks/tms",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "webhooks",
+                    "tms"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "Valida la asignación directa a devolución sin requerir almacenamiento de evidencias."
+        },
+        {
+          "name": "Flujo de Devolución al Cliente",
+          "item": [
+            {
+              "name": "NOT RETURNED",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"serviceType\": \"RETURN\",\r\n  \"dispatchType\": \"REVERSE\",\r\n  \"status\": \"NOT RETURNED\",\r\n  \"subStatus\": \"CLIENT REJECTED RECEIPT\",\r\n  \"vehicleCode\": \"LIMURB06VAN\",\r\n  \"courierName\": \"Conductor 46\",\r\n  \"details\": {\r\n    \"orderNumber\": \"ORD-RETORNO-DIRECTO-03\",\r\n    \"trackingNumber\": \"TRK-RT-03\",\r\n    \"clientCode\": \"01021755\",\r\n    \"clientName\": \"TIENDAS PERUANAS S.A.\",\r\n    \"receivedBy\": \"\",\r\n    \"comments\": \"Discrepancia en el sello de seguridad\",\r\n    \"evidences\": [\r\n      {\r\n        \"label\": \"Acta de Rechazo\",\r\n        \"fileType\": \".jpg\",\r\n        \"fileName\": \"rechazo_almacen_03.jpg\",\r\n        \"url\": \"https://beetrack.com/img/rechazo_03.jpg\"\r\n      }\r\n    ]\r\n  },\r\n  \"eventDate\": \"2026-10-07 19:15:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/webhooks/tms",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "webhooks",
+                    "tms"
+                  ]
+                },
+                "description": "Valida el guardado de evidencias cuando el almacén del cliente no puede recibir el paquete devuelto."
+              },
+              "response": []
+            },
+            {
+              "name": "RETURNED",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"serviceType\": \"RETURN\",\r\n  \"dispatchType\": \"REVERSE\",\r\n  \"status\": \"RETURNED\",\r\n  \"subStatus\": \"RETURN COMPLETED\",\r\n  \"vehicleCode\": \"LIMURB06VAN\",\r\n  \"courierName\": \"Conductor 46\",\r\n  \"details\": {\r\n    \"orderNumber\": \"ORD-RETORNO-DIRECTO-03\",\r\n    \"trackingNumber\": \"TRK-RT-03\",\r\n    \"clientCode\": \"01021755\",\r\n    \"clientName\": \"TIENDAS PERUANAS S.A.\",\r\n    \"receivedBy\": \"Supervisor Recepciones\",\r\n    \"comments\": \"Paquete devuelto al cliente y firmado\",\r\n    \"evidences\": [\r\n      {\r\n        \"label\": \"Firma Recepción\",\r\n        \"fileType\": \".png\",\r\n        \"fileName\": \"firma_devolucion_03.png\",\r\n        \"url\": \"https://beetrack.com/img/firma_dev_03.png\"\r\n      }\r\n    ]\r\n  },\r\n  \"eventDate\": \"2026-10-07 20:00:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/webhooks/tms",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "webhooks",
+                    "tms"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Entrega Exitosa y Bloqueo de Estados Terminales",
+          "item": [
+            {
+              "name": "DELIVERED",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"serviceType\": \"LAST_MILE\",\r\n  \"dispatchType\": \"HOME_DELIVERY\",\r\n  \"status\": \"DELIVERED\",\r\n  \"subStatus\": \"CLIENT RECEIVED\",\r\n  \"vehicleCode\": \"LIMURB06VAN\",\r\n  \"courierName\": \"Conductor 46\",\r\n  \"details\": {\r\n    \"orderNumber\": \"ORD-TERMINAL-VALIDATION\",\r\n    \"trackingNumber\": \"OE2500000006-01\",\r\n    \"clientCode\": \"01021755\",\r\n    \"clientName\": \"TIENDAS PERUANAS S.A.\",\r\n    \"receivedBy\": \"Pepito Perez\",\r\n    \"comments\": \"Entregado en domicilio\",\r\n    \"evidences\": [\r\n      {\r\n        \"label\": \"Paquete\",\r\n        \"fileType\": \".jpg\",\r\n        \"fileName\": \"delivered_100.jpg\",\r\n        \"url\": \"https://beetrack.com/img/delivered_100.jpg\"\r\n      }\r\n    ]\r\n  },\r\n  \"eventDate\": \"2026-10-07 20:30:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/webhooks/tms",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "webhooks",
+                    "tms"
+                  ]
+                },
+                "description": "Valida que el contador de visitas suba a 1, guarde evidencias y pase a estado terminal"
+              },
+              "response": []
+            },
+            {
+              "name": "Intento de modificación sobre orden terminal (Validación de bloqueo)",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"serviceType\": \"LAST_MILE\",\r\n  \"dispatchType\": \"HOME_DELIVERY\",\r\n  \"status\": \"STARTED\",\r\n  \"subStatus\": \"REINTENTO INDEBIDO\",\r\n  \"vehicleCode\": \"LIMURB06VAN\",\r\n  \"courierName\": \"Conductor 46\",\r\n  \"details\": {\r\n    \"orderNumber\": \"ORD-TERMINAL-VALIDATION\",\r\n    \"trackingNumber\": \"OE2500000006-01\",\r\n    \"clientCode\": \"01021755\",\r\n    \"clientName\": \"TIENDAS PERUANAS S.A.\",\r\n    \"receivedBy\": \"\",\r\n    \"comments\": \"Evento tardío o duplicado\",\r\n    \"evidences\": []\r\n  },\r\n  \"eventDate\": \"2026-10-07 21:00:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/webhooks/tms",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "webhooks",
+                    "tms"
+                  ]
+                },
+                "description": "Envía este evento sobre la misma orden `ORD-TERMINAL-VALIDATION` que ya está en `DELIVERED`.  \n**Resultado esperado en consola:** El sistema detecta el estado final y descarta la actualización sin modificar el OMS."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Validación de Errores de Entrada (HTTP 400 Bad Request)",
+          "item": [
+            {
+              "name": "Campos Obligatorios",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"serviceType\": \"LAST_MILE\",\r\n  \"dispatchType\": \"HOME_DELIVERY\",\r\n  \"status\": \"DELIVERED\",\r\n  \"details\": {\r\n    \"orderNumber\": \"\",\r\n    \"clientCode\": \"01021755\"\r\n  },\r\n  \"eventDate\": \"2026-10-07 21:10:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/webhooks/tms",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "webhooks",
+                    "tms"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "EstadosNoReconocidos",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"serviceType\": \"LAST_MILE\",\r\n  \"dispatchType\": \"HOME_DELIVERY\",\r\n  \"status\": \"ESTADONORECONOCIDO\",\r\n  \"subStatus\": \"CLIENT RECEIVED\",\r\n  \"vehicleCode\": \"LIMURB06VAN\",\r\n  \"courierName\": \"Conductor 46\",\r\n  \"details\": {\r\n    \"orderNumber\": \"ORD-TERMINAL-VALIDATION\",\r\n    \"trackingNumber\": \"OE2500000006-01\",\r\n    \"clientCode\": \"01021755\",\r\n    \"clientName\": \"TIENDAS PERUANAS S.A.\",\r\n    \"receivedBy\": \"Pepito Perez\",\r\n    \"comments\": \"Entregado en domicilio\",\r\n    \"evidences\": [\r\n      {\r\n        \"label\": \"Paquete\",\r\n        \"fileType\": \".jpg\",\r\n        \"fileName\": \"delivered_100.jpg\",\r\n        \"url\": \"https://beetrack.com/img/delivered_100.jpg\"\r\n      }\r\n    ]\r\n  },\r\n  \"eventDate\": \"2026-10-07 20:30:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/webhooks/tms",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "webhooks",
+                    "tms"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "PRODUCTION_TEST",
+          "item": [
+            {
+              "name": "PROD_TEST",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "// 1. Obtener la clave desde las variables de entorno activas (o fallback local)\r",
+                      "const secretKey = pm.environment.get(\"tms_api_key\") || \"local-dev-api-key-12345\";\r",
+                      "\r",
+                      "// 2. Extraer el body asegurando que exista contenido\r",
+                      "let bodyContent = pm.request.body ? (pm.request.body.raw || \"\") : \"\";\r",
+                      "\r",
+                      "if (bodyContent) {\r",
+                      "    // 3. Normalizar saltos de línea (CRLF a LF) y eliminar espacios/retornos en los extremos\r",
+                      "    const cleanBody = bodyContent.replace(/\\r\\n/g, \"\\n\").trim();\r",
+                      "\r",
+                      "    // 4. Calcular el HMAC-SHA256\r",
+                      "    const hash = CryptoJS.HmacSHA256(cleanBody, secretKey);\r",
+                      "    const signature = \"sha256=\" + CryptoJS.enc.Hex.stringify(hash);\r",
+                      "\r",
+                      "    // 5. Inyectar el encabezado X-Hub-Signature-256\r",
+                      "    pm.request.headers.upsert({\r",
+                      "        key: \"X-Hub-Signature-256\",\r",
+                      "        value: signature\r",
+                      "    });\r",
+                      "\r",
+                      "    console.log(\"Secret utilizado:\", secretKey);\r",
+                      "    console.log(\"Longitud body en Postman:\", cleanBody.length);\r",
+                      "    console.log(\"Firma generada:\", signature);\r",
+                      "} else {\r",
+                      "    console.warn(\"No se detectó contenido en el body de la petición.\");\r",
+                      "}"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"serviceType\": \"PICKUP\",\r\n  \"dispatchType\": \"STORE_WITHDRAWAL\",\r\n  \"status\": \"PLANNING\",\r\n  \"subStatus\": \"ASSIGNED TO ROUTE\",\r\n  \"vehicleCode\": \"LIMURB06VAN\",\r\n  \"courierName\": \"Conductor 46\",\r\n  \"details\": {\r\n    \"orderNumber\": \"ORD-PICKUP-01\",\r\n    \"trackingNumber\": \"TRK-PK-01\",\r\n    \"clientCode\": \"01021755\",\r\n    \"clientName\": \"TIENDAS PERUANAS S.A.\",\r\n    \"receivedBy\": \"\",\r\n    \"comments\": \"Pedido programado para recojo\",\r\n    \"evidences\": []\r\n  },\r\n  \"eventDate\": \"2026-10-07 08:00:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/webhooks/tms",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "webhooks",
+                    "tms"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "TEST_PAYLOAD_PESADO",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "const bigString = \"X\".repeat(2.5 * 1024 * 1024); // 2.5 MB\r",
+                      "pm.variables.set(\"payload_pesado\", bigString);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"serviceType\": \"PICKUP\",\r\n  \"dispatchType\": \"STORE_WITHDRAWAL\",\r\n  \"status\": \"PLANNING\",\r\n  \"subStatus\": \"ASSIGNED TO ROUTE\",\r\n  \"vehicleCode\": \"LIMURB06VAN\",\r\n  \"courierName\": \"Conductor 46\",\r\n  \"details\": {\r\n    \"orderNumber\": \"ORD-PICKUP-01\",\r\n    \"trackingNumber\": \"TRK-PK-01\",\r\n    \"clientCode\": \"01021755\",\r\n    \"clientName\": \"TIENDAS PERUANAS S.A.\",\r\n    \"receivedBy\": \"\",\r\n    \"comments\": \"Pedido programado para recojo\",\r\n    \"evidences\": []\r\n  },\r\n  \"eventDate\": \"2026-10-07 08:00:00\",\r\n  \"comments\": \"{{payload_pesado}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/webhooks/tms",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "webhooks",
+                    "tms"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{jwt_token}}",
+            "type": "string"
+          }
+        ]
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "ORDERS",
+      "item": [
+        {
+          "name": "history",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/orders/ORD-FALLAS-3V/history",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "orders",
+                "ORD-FALLAS-3V",
+                "history"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
