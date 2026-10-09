@@ -1,10 +1,42 @@
 {
   "openapi": "3.0.4",
   "info": {
-    "title": "Scharff.Test.Api",
-    "version": "1.0"
+    "title": "Scharff TMS-OMS Integration API",
+    "description": "Middleware de integración de eventos logísticos TMS a OMS con .NET 10",
+    "version": "v1"
   },
   "paths": {
+    "/api/v1/auth/token": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/orders/{orderNumber}/history": {
       "get": {
         "tags": [
@@ -143,6 +175,20 @@
   },
   "components": {
     "schemas": {
+      "AuthRequest": {
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "clientSecret": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ProblemDetails": {
         "type": "object",
         "properties": {
@@ -266,9 +312,23 @@
         },
         "additionalProperties": false
       }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Ingrese el token JWT con el prefijo Bearer. Ejemplo: Bearer {token}",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
     }
   },
+  "security": [
+    { }
+  ],
   "tags": [
+    {
+      "name": "Auth"
+    },
     {
       "name": "Orders"
     },

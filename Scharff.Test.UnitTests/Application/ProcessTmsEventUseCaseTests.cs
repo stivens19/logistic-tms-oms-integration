@@ -3,6 +3,7 @@ using Scharff.Test.Application.DTOs;
 using Scharff.Test.Application.Interfaces;
 using Scharff.Test.Application.UseCases;
 using Scharff.Test.Domain.Entities;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,19 +16,21 @@ namespace Scharff.Test.UnitTests.Application
         private readonly Mock<ICloudStorageService> _storageMock;
         private readonly Mock<IClientNotifier> _notifierMock;
         private readonly ProcessTmsEventUseCase _useCase;
-
+        private readonly Mock<ILogger<ProcessTmsEventUseCase>> _loggerMock;
         public ProcessTmsEventUseCaseTests()
         {
             _repoMock = new Mock<IOrderRepository>();
             _storageMock = new Mock<ICloudStorageService>();
             _notifierMock = new Mock<IClientNotifier>();
+            _loggerMock = new Mock<ILogger<ProcessTmsEventUseCase>>();
 
             _notifierMock.Setup(n => n.AppliesTo(It.IsAny<string>())).Returns(true);
 
             _useCase = new ProcessTmsEventUseCase(
                 _repoMock.Object,
                 _storageMock.Object,
-                new[] { _notifierMock.Object }
+                new[] { _notifierMock.Object },
+                _loggerMock.Object
             );
         }
 

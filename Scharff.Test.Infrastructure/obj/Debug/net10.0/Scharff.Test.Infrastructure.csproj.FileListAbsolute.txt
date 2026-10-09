@@ -10,6 +10,7 @@ D:\.NET ESTUDIOS\Scharff.Test\Scharff.Test.Infrastructure\obj\Debug\net10.0\Scha
 D:\.NET ESTUDIOS\Scharff.Test\Scharff.Test.Infrastructure\obj\Debug\net10.0\Scharff.Test.Infrastructure.AssemblyInfoInputs.cache
 D:\.NET ESTUDIOS\Scharff.Test\Scharff.Test.Infrastructure\obj\Debug\net10.0\Scharff.Test.Infrastructure.AssemblyInfo.cs
 D:\.NET ESTUDIOS\Scharff.Test\Scharff.Test.Infrastructure\obj\Debug\net10.0\Scharff.Test.Infrastructure.csproj.CoreCompileInputs.cache
+D:\.NET ESTUDIOS\Scharff.Test\Scharff.Test.Infrastructure\obj\Debug\net10.0\Scharff.Test.Infrastructure.sourcelink.json
 D:\.NET ESTUDIOS\Scharff.Test\Scharff.Test.Infrastructure\obj\Debug\net10.0\Scharff..2AB565FF.Up2Date
 D:\.NET ESTUDIOS\Scharff.Test\Scharff.Test.Infrastructure\obj\Debug\net10.0\Scharff.Test.Infrastructure.dll
 D:\.NET ESTUDIOS\Scharff.Test\Scharff.Test.Infrastructure\obj\Debug\net10.0\refint\Scharff.Test.Infrastructure.dll
